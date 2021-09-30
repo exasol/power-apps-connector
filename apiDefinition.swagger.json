@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Exasol Connector",
+    "version": "v1",
+    "description" : "Exasol Connector For Power Apps"
+  },
+  "host": "api.exasol.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/api/Exasol/DeleteRow/{id}": {
+      "delete": {
+        "tags": [
+          "Exasol"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "DeleteRow",
+        "description": "DeleteRow",
+        "operationId": "DeleteRow"
+      }
+    },
+    "/api/Exasol/GetRow/{tablename}/{id}": {
+      "get": {
+        "tags": [
+          "Exasol"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tablename",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "GetRow",
+        "description": "GetRow",
+        "operationId": "GetRow"
+      }
+    },
+    "/api/Exasol/GetRows/{tablename}/{filter}": {
+      "get": {
+        "tags": [
+          "Exasol"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tablename",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "GetRows",
+        "description": "GetRows",
+        "operationId": "GetRows"
+      }
+    },
+    "/api/Exasol/InsertRow": {
+      "post": {
+        "tags": [
+          "Exasol"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "InsertRow",
+        "description": "InsertRow",
+        "operationId": "InsertRow"
+      }
+    },
+    "/api/Exasol/Query/{sql}": {
+      "get": {
+        "tags": [
+          "Exasol"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sql",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "QueryGet",
+        "description": "QueryGet",
+        "operationId": "QueryGet"
+      }
+    },
+    "/api/Exasol/Query": {
+      "post": {
+        "tags": [
+          "Exasol"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "QueryPost",
+        "description": "Querypost",
+        "operationId": "QueryPost"
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "apikey"
+    }
+  },
+  "security": [],
+  "tags": []
+}

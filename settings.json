@@ -1,0 +1,9 @@
+{
+  "connectorId": "shared_paconnectorapi-5fd22db7246aaabd05-5f8594a392b3ab3e40",
+  "environment": "43e2e029-4921-40b4-beb3-42396819fa25",
+  "apiProperties": "apiProperties.json",
+  "apiDefinition": "apiDefinition.swagger.json",
+  "icon": "icon.png",
+  "powerAppsUrl": "https://api.powerapps.com",
+  "powerAppsApiVersion": "2016-11-01"
+}
