@@ -16,3 +16,6 @@ The connector was created as follows:
 Paconn CLI tool here (requires az tool):
 https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli
 
+
+You can set up a developer account to develop and test, free of charge, more information here:
+https://go.microsoft.com/fwlink/?linkid=847282
