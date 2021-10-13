@@ -13,12 +13,12 @@
             "required": "true"
           }
         }
-      },
+      },      
       "api": {
         "type": "string",
         "uiDefinition": {
-          "displayName": "Exasol REST API uri",
-          "description": "API Endpoint",
+          "displayName": "API Endpoint",
+          "description": "API Endpoint (ip address or host name)",
           "tooltip": "Provide API Endpoint name",
           "constraints": {
             "tabIndex": 1,
@@ -33,9 +33,9 @@
     "policyTemplateInstances": [
       {
         "templateId": "dynamichosturl",
-        "title": "hosturl",
+        "title": "host url",
         "parameters": {
-          "x-ms-apimTemplateParameter.urlTemplate": "https://@connectionParameters('api')"
+          "x-ms-apimTemplateParameter.urlTemplate": "http://@connectionParameters('api')/api/v1"
         }
       }
     ],
