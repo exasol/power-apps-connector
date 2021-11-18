@@ -5,7 +5,7 @@
         "type": "securestring",
         "uiDefinition": {
           "displayName": "API Key",
-          "description": "The API Key for this api",
+          "description": "The API Key for this API",
           "tooltip": "Provide your API Key",
           "constraints": {
             "tabIndex": 2,
@@ -17,9 +17,9 @@
       "api": {
         "type": "string",
         "uiDefinition": {
-          "displayName": "API Endpoint",
-          "description": "API Endpoint (ip address or host name)",
-          "tooltip": "Provide API Endpoint name",
+          "displayName": "Host",
+          "description": "Host (ip address or host name)",
+          "tooltip": "Provide Host name or IP address",
           "constraints": {
             "tabIndex": 1,
             "clearText": false,
@@ -30,6 +30,8 @@
     },
     "iconBrandColor": "#007ee5",
     "capabilities": [],
+    "publisher": "Exasol AG",
+    "stackOwner": "Exasol AG",
     "policyTemplateInstances": [
       {
         "templateId": "dynamichosturl",
@@ -38,7 +40,6 @@
           "x-ms-apimTemplateParameter.urlTemplate": "http://@connectionParameters('api')/api/v1"
         }
       }
-    ],
-    "publisher": "Pieterjan Spoelders (EXTERNAL)"
+    ]
   }
 }
