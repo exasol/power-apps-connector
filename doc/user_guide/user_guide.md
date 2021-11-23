@@ -118,16 +118,17 @@ Run a custom command, for more advanced scenarios.
 
 
 
-Finally, we can start using the connector via this connection in power apps. 
-Click 'Create' in the left tab.
+## Next steps
 
-For this example we'll select 'Create from blank'
+This completes the setup and we can start using the connector via the connection we made in power apps itself. 
+
+For this example we'll create a new canvas app from scratch.
 
 ## Tutorial and examples
 
-In this section we'll create a very simple app showcasing all functionality of the Exasol connector with working examples.
+We'll create a very simple app and some flows showcasing functionality of the Exasol connector with working examples.
 
-Our app will be a very simple app to display, add, remove and update a table of actors.
+Our app will display, add and optionally remove and update a table of actors in our Exasol database.
 
 ### Setup
 
@@ -142,7 +143,7 @@ CREATE TABLE actors (id INTEGER IDENTITY,
               age INTEGER);
 ```
 
-Let's also add some data
+Let's also add some data as well:
 
 ```sql
 INSERT INTO PACONN.ACTORS
@@ -154,13 +155,13 @@ VALUES('Schwarzenegger', 'Arnold', 74);
 
 ### Creating our demo app
 
-Let's start from scratch with displaying a list of actors.
+Let's start with displaying our actors in a datatable. 
 
-### Using a flow to fetch dynamic data
+We'll use the GetRows action available in our connector to fetch our list of actors. 
 
-We'll use GetRows to fetch our list of actors. 
+Since GetRows returns dynamic results depending on our query we'll need to create a flow to define the structure of our GetRows response as an additional step:
 
-Since GetRows returns dynamic results we'll need to create a flow to define the structure of our GetRows response:
+#### Using a flow to fetch dynamic data
 
 ##### Creating the flow
 
@@ -180,19 +181,23 @@ Select 'Power Apps button' as the base step.
 
 ![image-20211122152821647](user_guide.assets/image-20211122152821647.png)
 
-Let's give our flow a readable name, let's say "Get Actors", so we can easily find it later when we'll use it in power apps.
+Let's give our flow a readable name, let's say "Get Actors", so we can easily find it later when we'll use it in power apps itself.
 
-Next, let's add a New Step, search for "Exasol" (you can also find it under 'Custom'), click the Exasol connector and then pick the "Get Rows" action.
+Next, let's add a New Step, search for "Exasol" (you can also find it under "Custom"), click the Exasol connector and then pick the "Get Rows" action.
 
 ![image-20211122153351142](user_guide.assets/image-20211122153351142.png)
 
 ![image-20211122153535159](user_guide.assets/image-20211122153535159.png)
 
-Here you can select a schema, table and optionally filter. In our case we'll filter on age being higher than 30.
+Here you can select a schema, table and optionally add a filter condition. 
+
+
 
 Keep in mind that at most there will be 1000 records returned.
 
-(Note: If you need advanced filtering and ordering then you might be better served using the ExecuteQuery action which allows you complete freedom in composing a SQL Query.)
+(Note: If you need advanced filtering and ordering then you might be better served using the ExecuteQuery action which allows you complete freedom in composing a SQL Query. This action is demonstrated lower in this article.)
+
+
 
 Now it's time to test.
 
@@ -200,45 +205,51 @@ Now it's time to test.
 
 Click 'Test', 'Manually', 'Run Flow'. You'll be able to see the output.
 
-We see we are succesfully getting back data.
+We see we are succesfully getting back data, including rows.
 
 ![image-20211122154518588](user_guide.assets/image-20211122154518588.png)
 
-Let's make a copy of the output body for the next step (Select everything in the body with ctrl+A and then ctrl+C):
+Let's make a copy of the output body for the next step (Select everything in the output body with ctrl+A and then ctrl+C):
 
-Now all that's left to do is put this dynamic data into a response and provide a json schema so we can easily use the end result. For this we'll add another step aptly called 'Response'.
+
+
+Now all that's left to do is put this dynamic data into a response and provide a JSON schema so we can easily use the end result. 
+
+For this we'll add another step aptly called 'Response'.
 
 ![image-20211122155159004](user_guide.assets/image-20211122155159004.png)
 
-As Body, pick the body of the previous step.
+As Body we'll pick the body of the previous step.
 
 ![image-20211122155534291](user_guide.assets/image-20211122155534291.png)
 
-Under 'advanced options', select 'Generate from sample' and paste in the output body from your test run.
+Under "advanced options", select "Generate from sample" and paste in the output body from your test run.
 
 ![image-20211122155427767](user_guide.assets/image-20211122155427767.png)
 
 ![image-20211122155733345](user_guide.assets/image-20211122155733345.png)
 
-(You can also define the Response Body JSON Schema yourself but this is way more cumbersome.)
+(You can also define the Response Body JSON Schema yourself manually but I would not recommend it.)
 
 The step will now look like this:
 
 ![image-20211122162233007](user_guide.assets/image-20211122162233007.png)
 
-If you test the flow again you'll see there's also a schema being returned now:
+If you test the flow again you'll see the following:
 
 ![image-20211122162348959](user_guide.assets/image-20211122162348959.png)
 
 Save the flow. 
 
-##### Using our new flow in our canvas app
+##### Using our new GetActors flow in our canvas app
 
 Let's navigate back to our canvas app.
 
-I've added a datatable, and a refresh button.
 
-Let's add our flow to the refresh button: Click on the button, click in "onSelect" under "Advanced", then in the top "Action Tab" pick "Power Automate". Select the flow and add it.
+
+Let's add a data table, and a refresh button in the app screen.
+
+Let's add our flow to the refresh button: Click on the button, click in "OnSelect" under "Advanced", then in the top "Action Tab" pick "Power Automate". Select the flow and add it.
 
 Alter the formula like this:
 
@@ -257,25 +268,31 @@ ClearCollect(ActorsCollection,GetActorsResult.rows);
 
 This way, whenever we click the Refresh button or open the screen we'll store the whole response in `GetActorsResult` and the actual actors data in `ActorsCollection`.
 
-Let's also configure our datatable to use the `ActorsCollection` so we see the actual data.
+Let's also configure our datatable to use the `ActorsCollection` so we see the actual data coming in.
 
 ![image-20211122163707221](user_guide.assets/image-20211122163707221.png)
 
 
 
-We can now already see the contents of our Actor table.
+If we alt-click on the refresh button we'll already see contents of our Actor table.
 
-
+#### Adding actors to our actors table
 
 The next step is to add actors to our database.
 
-For this we'll need to use InsertRows. InsertRows has dynamic data as an input so we'll need to create a flow to properly set this up.
+For this we'll need to use InsertRows action of our Connector. 
 
-Let's navigate back to flows and create a new flow, start from template and pick Power Apps Button as the base step again.
+InsertRows has dynamic data as an input so we'll need to create a flow to properly set this up.
 
-Once again, let's give it a good name (AddActor sounds good)
+Let's navigate back to the flows section and create a new flow, 
 
-Now we'll need some inputs. For this we'll add a couple of steps named 'Initialize variable'.
+Pick "Start from template" again and pick Power Apps Button as the base step as well.
+
+Once again, let's give it a good name (AddActor sounds good).
+
+
+
+Now we'll need some inputs. For this we'll add a couple of steps named "Initialize variable".
 
 In this case we need a first name, a last name and an age.
 
@@ -293,19 +310,19 @@ It's good practice to rename these steps first for readability and ease-of-use. 
 
 ![image-20211122170720869](user_guide.assets/image-20211122170720869.png)
 
-This is how our 3 initialize variable steps now look.
+This is how our 3 "Initialize variable" steps now look.
 
-The next step we'll add is the insert row step from our connector.
+The next step we'll add is the "Insert row" step from our Exasol connector.
 
 ![image-20211122171548756](user_guide.assets/image-20211122171548756.png)
 
 We'll configure the step as seen above, binding the variables to the corresponding columns.
 
-And that's it for this flow. We can now test this flow again as before and add some actors.
+As a last step we'll test this flow again as before and add some actors.
 
 
 
-After we're sure everything works we can head back to our app and add some Controls:
+After we're sure everything works we can head back to our app and add some controls.
 
 This time we'll add some text boxes, some informative labels and a button.
 
@@ -317,7 +334,7 @@ Let's also add our previous code to fetch data and fill our ActorCollection.
 
 ![image-20211123110939215](user_guide.assets/image-20211123110939215.png)
 
-The OnSelect now contains this code:
+The "Add actor" button's OnSelect action now contains the following code:
 
 `AddActor.Run(txtFirstname.Text,txtLastName.Text,txtAge.Text);`
 `Set(GetActorsResult,GetActors.Run());`
@@ -325,27 +342,27 @@ The OnSelect now contains this code:
 
 
 
-Let's play our application real quick and test it out!
+Let's play/start our application and test!
 
 ![image-20211123111742997](user_guide.assets/image-20211123111742997.png)
 
-As you can see we succesfully added our actor to the database.
+As you can see we succesfully added our actor to the database and see it being included in our data table by our refresh.
 
 ### In conclusion
 
 After creating these 2 flows and wiring them up to the UI you will probably begin to see a pattern:
 
-- We'll usually create a flow for a specific action. 
+- Wey create a flow for a specific action. 
 
 We do this because of ease-of-use, reusability, to hide complexity and also out of necessity, because we are often handling dynamic data which Power Apps itself can't handle or transform.
 
-- Next we'll wire up the flow into the UI we create for our actions.
+- We wire up the flow into the UI we create for our actions.
 
 
 
 ### More Examples
 
-What follows next are just a couple more examples of flows/actions that are possible with the connector, including some more advanced examples.
+What follows next are  a couple more examples of flows/actions that are possible with the connector, including some more advanced examples.
 
 Delete an actor by ID:
 
@@ -374,7 +391,7 @@ These actions allow you to form and send freeform SQL statements to the API.
 
 ##### Query the Exasol database
 
-Custom where query with like and wildcard
+Custom where query with like and wildcard:
 
 You'll probably use the 'Query the Exasol database' action when you need joins, or sorting, or when you want to trigger a stored procedure returning data.
 
@@ -386,7 +403,7 @@ A custom insert:
 
 ![image-20211123170726170](user_guide.assets/image-20211123170726170.png)
 
-
+TODO: Stored procedure
 
 ### Conclusion
 
