@@ -163,7 +163,6 @@
             "description": "Exasol column name for WHERE clause",
             "name": "columnName",
             "in": "query",
-            "required": true,
             "x-ms-summary": "Exasol column name for WHERE clause"
           },
           {
@@ -171,7 +170,6 @@
             "description": "Comparison predicate for WHERE clause",
             "name": "comparisonPredicate",
             "in": "query",
-            "required": true,
             "x-ms-summary": "Comparison predicate for WHERE clause"
           },
           {
@@ -179,7 +177,6 @@
             "description": "Value of the specified Exasol column",
             "name": "value",
             "in": "query",
-            "required": true,
             "x-ms-summary": "Value of the specified Exasol column"
           },
           {
@@ -187,7 +184,6 @@
             "description": "Type of the value: string, bool, int or float",
             "name": "valueType",
             "in": "query",
-            "required": true,
             "x-ms-summary": "Type of the value: string, bool, int or float"
           }
         ],
@@ -335,7 +331,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "object"
             }
           },
           "400": {
