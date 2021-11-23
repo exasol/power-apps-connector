@@ -247,11 +247,11 @@ Set(GetActorsResult,GetActors.Run());
 ClearCollect(ActorsCollection,GetActorsResult.rows);
 ```
 
-![(user_guide.assets/image-20211122162721717.png)
+
 
 ![image-20211122162953973](user_guide.assets/image-20211122162953973.png)
 
-(I've also added this to screen onVisible)
+(I've also added this same code to the screen's OnVisible so the data will load as soon as you open the application or screen)
 
 
 
@@ -261,7 +261,7 @@ Let's also configure our datatable to use the `ActorsCollection` so we see the a
 
 ![image-20211122163707221](user_guide.assets/image-20211122163707221.png)
 
-##### 
+
 
 We can now already see the contents of our Actor table.
 
@@ -303,4 +303,95 @@ We'll configure the step as seen above, binding the variables to the correspondi
 
 And that's it for this flow. We can now test this flow again as before and add some actors.
 
+
+
 After we're sure everything works we can head back to our app and add some Controls:
+
+This time we'll add some text boxes, some informative labels and a button.
+
+Next we'll wire everything together in the button's OnSelect, click on the Action tab above, click on Power Automate and insert the flow we just created (in our case: AddActor). As input we give in our 3 textboxes' corresponding text properties.
+
+![image-20211123110522300](user_guide.assets/image-20211123110522300.png)
+
+Let's also add our previous code to fetch data and fill our ActorCollection.
+
+![image-20211123110939215](user_guide.assets/image-20211123110939215.png)
+
+The OnSelect now contains this code:
+
+`AddActor.Run(txtFirstname.Text,txtLastName.Text,txtAge.Text);`
+`Set(GetActorsResult,GetActors.Run());`
+`ClearCollect(ActorsCollection,GetActorsResult.rows);`
+
+
+
+Let's play our application real quick and test it out!
+
+![image-20211123111742997](user_guide.assets/image-20211123111742997.png)
+
+As you can see we succesfully added our actor to the database.
+
+### In conclusion
+
+After creating these 2 flows and wiring them up to the UI you will probably begin to see a pattern:
+
+- We'll usually create a flow for a specific action. 
+
+We do this because of ease-of-use, reusability, to hide complexity and also out of necessity, because we are often handling dynamic data which Power Apps itself can't handle or transform.
+
+- Next we'll wire up the flow into the UI we create for our actions.
+
+
+
+### More Examples
+
+What follows next are just a couple more examples of flows/actions that are possible with the connector, including some more advanced examples.
+
+Delete an actor by ID:
+
+![image-20211123114458260](user_guide.assets/image-20211123114458260.png)
+
+ Update an actor's age by his ID:
+
+![image-20211123115220034](user_guide.assets/image-20211123115220034.png)
+
+
+
+### Advanced connector actions: 
+
+In some cases the basic get, insert, delete and update actions of the connector will be inadequate.
+
+For these cases we've provided 2 additional actions:
+
+- Query the Exasol Database
+- Execute a statement on the Exasol Database (INSERT, UPDATE, DELETE, etc)
+
+These actions allow you to form and send freeform SQL statements to the API.
+
+![image-20211123165519161](user_guide.assets/image-20211123165519161.png)
+
+#### Some examples of advanced connector actions
+
+##### Query the Exasol database
+
+Custom where query with like and wildcard
+
+You'll probably use the 'Query the Exasol database' action when you need joins, or sorting, or when you want to trigger a stored procedure returning data.
+
+![image-20211123121530142](user_guide.assets/image-20211123121530142.png)
+
+#### Execute a statement on the Exasol Database (INSERT, UPDATE, DELETE, etc)
+
+A custom insert:
+
+![image-20211123170726170](user_guide.assets/image-20211123170726170.png)
+
+
+
+### Conclusion
+
+The connector should provide you with every action you'll need to work with the Exasol Database.
+
+
+
+If anything's unclear or if there's any issue please let us know in the issue section.
