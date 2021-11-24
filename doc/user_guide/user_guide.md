@@ -5,7 +5,7 @@ You should first set up the Exasol REST API in case you haven't done so. (see: h
 
 ## How to install the Exasol Connector for Power Apps.
 
-Currently you'll need to use the paconn tool (installation instructions found here: https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli ) to create or update the connector in your organisation.
+Currently you'll need to use the paconn tool (installation instructions found here : https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli ) to create or update the connector in your organisation.
 
 The connector talks to the exasol-rest-api which you'll also need to setup. See the section above.
 
