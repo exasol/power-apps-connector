@@ -77,6 +77,7 @@ You'll find the connector in the search results, select it.
 A modal will pop up, you will be asked to configure the connector.
 
 ![](user_guide.assets/2021-11-22-11-07-29-image-16375779996591.png)
+
 `Host`: which is where your rest api is hosted or available (this can be an ip address or dns name)
 `API Key`: This is one of the authentication keys you've configured to gain access to the REST API. 
 
