@@ -36,7 +36,7 @@ You'll be prompted to select a Power Apps environment.
 
 Pick the environment where you want to install the connector.
 Follow the steps.
-If you get prompted to alter settings.json, press 'yes'. 
+If you get prompted to alter settings.json, press "yes". 
 
 ( It will update the id of the connector so you can easily update it afterwards using `paconn update -s [Path to settings.json]`).
 
@@ -68,7 +68,7 @@ Here you can:
 Under the "Dataverse" tab, select "Connections".
 
 Next, click on "New connection".
-In the search bar on the top right, search for 'custom'.
+In the search bar on the top right, search for "custom".
 
 You'll find the connector in the search results, select it.
 
