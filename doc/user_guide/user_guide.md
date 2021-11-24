@@ -5,40 +5,50 @@ You should first set up the Exasol REST API in case you haven't done so. (see: h
 
 ## How to install the Exasol Connector for Power Apps.
 
-Currently you'll need to use the paconn tool (installation instructions found here : https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli ) to create or update the connector in your organisation.
+Currently you'll need to use the paconn tool to  create or update the connector in your organisation.
+
+(installation instructions found here : https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli ) 
 
 The connector talks to the exasol-rest-api which you'll also need to setup. See the section above.
 
 ### Getting the connector files
 
 Clone this repository, download the repository zip or download the latest release from github and unzip the files.
-You should have a settings file, an icon file and a 
+The connector consists of a settings file, an icon file and a apiDefinition.swagger.json and apiProperties.json file which describe the connector.
 
 ### Using the paconn CLI tool to upload/create the connector within your organisation.
 
-Open up a CLI/Terminal.
+Open up the command line or a terminal.
+
+###### Authenticate
 
 First you'll need to authenticate in paconn, type:
-paconn login.
+`paconn login`
 Follow the steps to succesfully authenticate.
+
+###### Creating the connector
 
 Next you need to navigate to the folder where you downloaded or unzipped the connector files.
 
 Run the following command:
-paconn create -s [Path to settings.json]
-You'll be prompted to select a Power Apps environment. Pick the environment where you want to install the connector.
+`paconn create -s [Path to settings.json]`
+You'll be prompted to select a Power Apps environment. 
+
+Pick the environment where you want to install the connector.
 Follow the steps.
-If you get prompted to alter settings.json press 'yes' (it will update the id of the connector so you can easily update it afterwards).
+If you get prompted to alter settings.json, press 'yes'. 
 
-### Finding the connector
+( It will update the id of the connector so you can easily update it afterwards using `paconn update -s [Path to settings.json]`).
 
-If you now browse to https://make.powerapps.com/ and click on the 'Dataverse' tab to the left and then 'Custom Collectors' you should be able to see the connector.
+###### Inspecting the connector we just created in our environment/organisation.
+
+If you now browse to https://make.powerapps.com/ , pick the right organisation top right and click on the "Dataverse" tab to the left and then "Custom Connectors" you should be able to see the connector.
 
 ![image-20211122114520362](user_guide.assets/image-20211122114520362.png)
 
 
 
-#### Configuring the connector
+###### Configuring the connector
 
 You can further configure the connector via the edit icon:
 
@@ -46,16 +56,20 @@ You can further configure the connector via the edit icon:
 
 
 
-Here you can enable HTTPS (it uses HTTP by default) or if you wish to use a gateway.
+Here you can: 
+
+- Enable HTTPS (it uses HTTP by default).
+- Connect via on-premises data gateway.
 
 ![image-20211122114543409](user_guide.assets/image-20211122114543409.png)
 
 ### Making a connection using the connector
 
-Under the Dataverse tab, select connections.
+Under the "Dataverse" tab, select "Connections".
 
-Next, click on 'new connection'
-In the search bar on the top right, search for 'custom'
+Next, click on "New connection".
+In the search bar on the top right, search for 'custom'.
+
 You'll find the connector in the search results, select it.
 
 ![image-20211122114400236](user_guide.assets/image-20211122114400236.png)
@@ -63,10 +77,12 @@ You'll find the connector in the search results, select it.
 A modal will pop up, you will be asked to configure the connector.
 
 ![](user_guide.assets/2021-11-22-11-07-29-image-16375779996591.png)
-Host: which is where your rest api is hosted or available (this can be an ip address or dns name)
-API Key: This is one of the authentication keys you've configured for the rest api. (This is a secure parameter so this API Key will not be retrievable afterwards in the Power Apps UI. )
+`Host`: which is where your rest api is hosted or available (this can be an ip address or dns name)
+`API Key`: This is one of the authentication keys you've configured to gain access to the REST API. 
 
-(You can still edit these 2 values afterwards.)
+This is a secure parameter so this API Key will not be retrievable afterwards in the Power Apps UI.
+
+Note: You can still edit these 2 values afterwards.
 
 ### Testing the connector
 
@@ -76,9 +92,9 @@ Since you now have a connector and a connection we can test if everything is con
 
 To do so, go back to the connector tab, edit the connector, select "Test" at the top, pick the connection you created and run some tests.
 
-I personally always test with GetTables. 
+I personally always test the connector with the `GetTables` action. 
 
-You'll get a list of tables you have access to returned to you in the response if everything 's configured properly.
+You'll get a list of tables the database user has access to returned to you in the response if everything 's configured properly.
 
 # Using the connector in a Power App
 
@@ -120,7 +136,11 @@ Run a custom command, for more advanced scenarios.
 
 ## Next steps
 
-This completes the setup and we can start using the connector via the connection we made in power apps itself. 
+This completes the setup phase and a brief overview of the actions made available through the connector. 
+
+We can now start using the connector via the connection we made in Power Apps itself. 
+
+
 
 For this example we'll create a new canvas app from scratch.
 
@@ -130,7 +150,7 @@ We'll create a very simple app and some flows showcasing functionality of the Ex
 
 Our app will display, add and optionally remove and update a table of actors in our Exasol database.
 
-### Setup
+#### Setup table and data for our example
 
 We'll use the following script to setup our example table in the Exasol database:
 
@@ -153,43 +173,55 @@ VALUES('Schwarzenegger', 'Arnold', 74);
 
 
 
-### Creating our demo app
+#### Creating our demo app
 
 Let's start with displaying our actors in a datatable. 
 
-We'll use the GetRows action available in our connector to fetch our list of actors. 
+We'll use the `GetRows` action available in our connector to fetch a list of actors we store in the table we just created. 
 
-Since GetRows returns dynamic results depending on our query we'll need to create a flow to define the structure of our GetRows response as an additional step:
+Since `GetRows` returns dynamic results depending on our query we'll need to create a flow to define the structure of our `GetRows` response as an additional step:
 
 #### Using a flow to fetch dynamic data
 
 ##### Creating the flow
 
-Navigate to Flows
+Navigate to the "Flows" tab in the left overview pane.
 
 ![image-20211122152602771](user_guide.assets/image-20211122152602771.png)
 
 
 
-Select New flow, Start from Template, Template.
+Select "New flow", "Start from a template", "Template".
 
 ![image-20211122152641794](user_guide.assets/image-20211122152641794.png)
 
 
 
-Select 'Power Apps button' as the base step.
+Select "Power Apps button" as the base step.
 
 ![image-20211122152821647](user_guide.assets/image-20211122152821647.png)
 
 Let's give our flow a readable name, let's say "Get Actors", so we can easily find it later when we'll use it in power apps itself.
 
-Next, let's add a New Step, search for "Exasol" (you can also find it under "Custom"), click the Exasol connector and then pick the "Get Rows" action.
+Next, let's add a New Step, search for "Exasol" (you can also find it under "Custom"). 
+
+![image-20211124140320932](user_guide.assets/image-20211124140320932.png)
+
+Click the Exasol connector.
+
+You'll then get a nice overview of the actions available in the connector
+
+![image-20211124140414674](user_guide.assets/image-20211124140414674.png)
+
+
+
+Pick the "Get rows ..." action. 
 
 ![image-20211122153351142](user_guide.assets/image-20211122153351142.png)
 
 ![image-20211122153535159](user_guide.assets/image-20211122153535159.png)
 
-Here you can select a schema, table and optionally add a filter condition. 
+Here you can input a schema,a table and optionally add a filter condition. 
 
 
 
@@ -199,17 +231,18 @@ Keep in mind that at most there will be 1000 records returned.
 
 
 
-Now it's time to test.
+Now it's time to test the flow we have so far:
 
 ![image-20211122154144018](user_guide.assets/image-20211122154144018.png)
 
-Click 'Test', 'Manually', 'Run Flow'. You'll be able to see the output.
+Click "Test", "Manually", "Run Flow". You'll be able to see the output.
 
 We see we are succesfully getting back data, including rows.
 
 ![image-20211122154518588](user_guide.assets/image-20211122154518588.png)
 
-Let's make a copy of the output body for the next step (Select everything in the output body with ctrl+A and then ctrl+C):
+Let's make a copy of the output body to use in the next step we'll add to the flow: 
+Select everything in the output body by clicking in it, and then pressing "ctrl+A" and then "ctrl+C" to copy the contents of the body.
 
 
 
@@ -223,7 +256,7 @@ As Body we'll pick the body of the previous step.
 
 ![image-20211122155534291](user_guide.assets/image-20211122155534291.png)
 
-Under "advanced options", select "Generate from sample" and paste in the output body from your test run.
+Under "advanced options" select "Generate from sample" and paste in the output body from your test run.
 
 ![image-20211122155427767](user_guide.assets/image-20211122155427767.png)
 
@@ -262,39 +295,39 @@ ClearCollect(ActorsCollection,GetActorsResult.rows);
 
 ![image-20211122162953973](user_guide.assets/image-20211122162953973.png)
 
-(I've also added this same code to the screen's OnVisible so the data will load as soon as you open the application or screen)
-
-
+I've also added this same code to the screen's "OnVisible" so the data will load as soon as you open the application or screen.
 
 This way, whenever we click the Refresh button or open the screen we'll store the whole response in `GetActorsResult` and the actual actors data in `ActorsCollection`.
 
-Let's also configure our datatable to use the `ActorsCollection` so we see the actual data coming in.
+
+
+Let's configure our data table to use the `ActorsCollection` to visualize the data we retrieved using our GetActors flow.
 
 ![image-20211122163707221](user_guide.assets/image-20211122163707221.png)
 
 
 
-If we alt-click on the refresh button we'll already see contents of our Actor table.
+If we alt-click on the refresh button or if we "play" the application we'll already see the results of our GetActors flow.
 
 #### Adding actors to our actors table
 
-The next step is to add actors to our database.
+Now that we are listing the actors from our table, a logical next step is to provide a way to easily add actors to our database.
 
-For this we'll need to use InsertRows action of our Connector. 
+For this we'll need to use `InsertRows` action of our Connector. 
 
-InsertRows has dynamic data as an input so we'll need to create a flow to properly set this up.
+`InsertRows` has dynamic data as an input so we'll need to create a flow to properly set this up.
 
-Let's navigate back to the flows section and create a new flow, 
+Let's navigate back to the "Flows" section and create a new flow, 
 
-Pick "Start from template" again and pick Power Apps Button as the base step as well.
+Pick "Start from a template" and then pick "Power Apps button" as the base step again.
 
-Once again, let's give it a good name (AddActor sounds good).
+Let's give it a good name as before ("AddActor" sounds good).
 
 
 
 Now we'll need some inputs. For this we'll add a couple of steps named "Initialize variable".
 
-In this case we need a first name, a last name and an age.
+In this case we need a Initialize variable step for the first name, the last name and the age of the actor.
 
 ![image-20211122165242953](user_guide.assets/image-20211122165242953.png)
 
@@ -318,15 +351,19 @@ The next step we'll add is the "Insert row" step from our Exasol connector.
 
 We'll configure the step as seen above, binding the variables to the corresponding columns.
 
-As a last step we'll test this flow again as before and add some actors.
+As a last step we'll test this flow again as we did with the previous flow. Let's add some actors while we're at it.
 
 
 
-After we're sure everything works we can head back to our app and add some controls.
+After we're sure everything works as we want we can head back to our app and add the UI elements we need to easily add our actors.
 
 This time we'll add some text boxes, some informative labels and a button.
 
-Next we'll wire everything together in the button's OnSelect, click on the Action tab above, click on Power Automate and insert the flow we just created (in our case: AddActor). As input we give in our 3 textboxes' corresponding text properties.
+Next we'll wire everything together in the button's OnSelect action: 
+
+Click on the Action tab in the top menu bar, click on "Power Automate" and insert the flow we just created (in our case we called it "AddActor"). 
+
+As input we give in our 3 textboxes' corresponding `.Text` properties.
 
 ![image-20211123110522300](user_guide.assets/image-20211123110522300.png)
 
@@ -334,7 +371,7 @@ Let's also add our previous code to fetch data and fill our ActorCollection.
 
 ![image-20211123110939215](user_guide.assets/image-20211123110939215.png)
 
-The "Add actor" button's OnSelect action now contains the following code:
+The "Add actor" button's "OnSelect" action now contains the following code:
 
 `AddActor.Run(txtFirstname.Text,txtLastName.Text,txtAge.Text);`
 `Set(GetActorsResult,GetActors.Run());`
@@ -342,11 +379,11 @@ The "Add actor" button's OnSelect action now contains the following code:
 
 
 
-Let's play/start our application and test!
+Let's play/start our application and test it out:
 
 ![image-20211123111742997](user_guide.assets/image-20211123111742997.png)
 
-As you can see we succesfully added our actor to the database and see it being included in our data table by our refresh.
+As you can see we succesfully added an actor to the database.
 
 ### In conclusion
 
@@ -362,7 +399,7 @@ We do this because of ease-of-use, reusability, to hide complexity and also out 
 
 ### More Examples
 
-What follows next are  a couple more examples of flows/actions that are possible with the connector, including some more advanced examples.
+What follows next are  a couple more examples of flows and actions that are possible with the connector, including some more advanced examples.
 
 Delete an actor by ID:
 
@@ -397,13 +434,13 @@ You'll probably use the 'Query the Exasol database' action when you need joins, 
 
 ![image-20211123121530142](user_guide.assets/image-20211123121530142.png)
 
-###### Triggering a script/stored procedure and returning data:
+###### Triggering a script or stored procedure and returning data:
 
 ![image-20211124122500122](user_guide.assets/image-20211124122500122.png)
 
 
 
-###### Triggering a script/stored procedure and not returning data :
+###### Triggering a script or stored procedure and not returning data :
 
 (Note: you can also do this using Execute statement)
 
