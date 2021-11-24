@@ -1,5 +1,4 @@
-# power-apps-connector
-Power Apps Connector for Exasol
+# Power Apps Connector for Exasol
 
 This repository contains the Power Apps Connector for Exasol.
 
