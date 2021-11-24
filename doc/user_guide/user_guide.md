@@ -78,7 +78,8 @@ A modal will pop up, you will be asked to configure the connector.
 
 ![](user_guide.assets/2021-11-22-11-07-29-image-16375779996591.png)
 
-`Host`: which is where your rest api is hosted or available (this can be an ip address or dns name)
+`Host`: Where your REST API is hosted (this can be an IP address or DNS name).
+
 `API Key`: This is one of the authentication keys you've configured to gain access to the REST API. 
 
 This is a secure parameter so this API Key will not be retrievable afterwards in the Power Apps UI.
@@ -87,7 +88,7 @@ Note: You can still edit these 2 values afterwards.
 
 ### Testing the connector
 
-Since you now have a connector and a connection we can test if everything is configured properly.
+Since we now have a connector and a connection we can test if everything is configured properly.
 
 ![image-20211122115250181](user_guide.assets/image-20211122115250181.png)
 
