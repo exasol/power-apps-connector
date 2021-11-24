@@ -456,7 +456,7 @@ You'll probably use the 'Query the Exasol database' action when you need joins, 
 
 
 
-### Conclusion
+### Issues
 
 The connector should provide you with every action you need to work with the Exasol Database.
 
