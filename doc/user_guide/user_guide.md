@@ -352,7 +352,7 @@ As you can see we succesfully added our actor to the database and see it being i
 
 After creating these 2 flows and wiring them up to the UI you will probably begin to see a pattern:
 
-- Wey create a flow for a specific action. 
+- We create a flow for a specific action. 
 
 We do this because of ease-of-use, reusability, to hide complexity and also out of necessity, because we are often handling dynamic data which Power Apps itself can't handle or transform.
 
@@ -391,24 +391,36 @@ These actions allow you to form and send freeform SQL statements to the API.
 
 ##### Query the Exasol database
 
-Custom where query with like and wildcard:
+###### Custom where query with like and wildcard:
 
 You'll probably use the 'Query the Exasol database' action when you need joins, or sorting, or when you want to trigger a stored procedure returning data.
 
 ![image-20211123121530142](user_guide.assets/image-20211123121530142.png)
 
+###### Triggering a script/stored procedure and returning data:
+
+![image-20211124122500122](user_guide.assets/image-20211124122500122.png)
+
+
+
+###### Triggering a script/stored procedure and not returning data :
+
+(Note: you can also do this using Execute statement)
+
+![image-20211124122740144](user_guide.assets/image-20211124122740144.png)
+
+
+
 #### Execute a statement on the Exasol Database (INSERT, UPDATE, DELETE, etc)
 
-A custom insert:
+###### A custom insert:
 
 ![image-20211123170726170](user_guide.assets/image-20211123170726170.png)
 
-TODO: Stored procedure
+
 
 ### Conclusion
 
-The connector should provide you with every action you'll need to work with the Exasol Database.
+The connector should provide you with every action you need to work with the Exasol Database.
 
-
-
-If anything's unclear or if there's any issue please let us know in the issue section.
+If anything's unclear or if there's any issue please let us know in the issues section.
