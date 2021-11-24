@@ -14,7 +14,7 @@ Please refer to the [user guide](doc/user_guide/user_guide.md).
 
 ## Modifying the connector
 
-If you wish to modify the connector you should read the[developer guide](doc/developer_guide/developer_guide.md).
+If you wish to modify the connector you should read the [developer guide](doc/developer_guide/developer_guide.md).
 
 ## Supported Databases
 
