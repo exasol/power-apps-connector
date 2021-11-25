@@ -46,22 +46,19 @@ If you now browse to https://make.powerapps.com/ , pick the right organisation t
 
 ![image-20211122114520362](user_guide.assets/image-20211122114520362.png)
 
-
-
 ###### Configuring the connector
 
 You can further configure the connector via the edit icon:
 
 ![image-20211122115800918](user_guide.assets/image-20211122115800918.png)
 
-
-
 Here you can: 
 
 - Enable HTTPS (it uses HTTP by default).
-- Connect via on-premises data gateway.
 
 ![image-20211122114543409](user_guide.assets/image-20211122114543409.png)
+
+Important: Enabling "Connect via on-premises data gateway" is currently NOT supported. A separate connector and instructions will be delivered on a later date.
 
 ### Making a connection using the connector
 
@@ -134,15 +131,11 @@ Run a custom query to fetch data, for more advanced scenarios.
 
 Run a custom command, for more advanced scenarios.
 
-
-
 ## Next steps
 
 This completes the setup phase and a brief overview of the actions made available through the connector. 
 
 We can now start using the connector via the connection we made in Power Apps itself. 
-
-
 
 For this example we'll create a new canvas app from scratch.
 
@@ -173,8 +166,6 @@ INSERT INTO PACONN.ACTORS
 VALUES('Schwarzenegger', 'Arnold', 74);
 ```
 
-
-
 #### Creating our demo app
 
 Let's start with displaying our actors in a datatable. 
@@ -191,13 +182,9 @@ Navigate to the "Flows" tab in the left overview pane.
 
 ![image-20211122152602771](user_guide.assets/image-20211122152602771.png)
 
-
-
 Select "New flow", "Start from a template", "Template".
 
 ![image-20211122152641794](user_guide.assets/image-20211122152641794.png)
-
-
 
 Select "Power Apps button" as the base step.
 
@@ -215,8 +202,6 @@ You'll then get a nice overview of the actions available in the connector
 
 ![image-20211124140414674](user_guide.assets/image-20211124140414674.png)
 
-
-
 Pick the "Get rows ..." action. 
 
 ![image-20211122153351142](user_guide.assets/image-20211122153351142.png)
@@ -225,13 +210,9 @@ Pick the "Get rows ..." action.
 
 Here you can input a schema,a table and optionally add a filter condition. 
 
-
-
 Keep in mind that at most there will be 1000 records returned.
 
 (Note: If you need advanced filtering and ordering then you might be better served using the ExecuteQuery action which allows you complete freedom in composing a SQL Query. This action is demonstrated lower in this article.)
-
-
 
 Now it's time to test the flow we have so far:
 
@@ -245,8 +226,6 @@ We see we are succesfully getting back data, including rows.
 
 Let's make a copy of the output body to use in the next step we'll add to the flow: 
 Select everything in the output body by clicking in it, and then pressing "ctrl+A" and then "ctrl+C" to copy the contents of the body.
-
-
 
 Now all that's left to do is put this dynamic data into a response and provide a JSON schema so we can easily use the end result. 
 
@@ -280,8 +259,6 @@ Save the flow.
 
 Let's navigate back to our canvas app.
 
-
-
 Let's add a data table, and a refresh button in the app screen.
 
 Let's add our flow to the refresh button: Click on the button, click in "OnSelect" under "Advanced", then in the top "Action Tab" pick "Power Automate". Select the flow and add it.
@@ -293,21 +270,15 @@ Set(GetActorsResult,GetActors.Run());
 ClearCollect(ActorsCollection,GetActorsResult.rows);
 ```
 
-
-
 ![image-20211122162953973](user_guide.assets/image-20211122162953973.png)
 
 I've also added this same code to the screen's "OnVisible" so the data will load as soon as you open the application or screen.
 
 This way, whenever we click the Refresh button or open the screen we'll store the whole response in `GetActorsResult` and the actual actors data in `ActorsCollection`.
 
-
-
 Let's configure our data table to use the `ActorsCollection` to visualize the data we retrieved using our GetActors flow.
 
 ![image-20211122163707221](user_guide.assets/image-20211122163707221.png)
-
-
 
 If we alt-click on the refresh button or if we "play" the application we'll already see the results of our GetActors flow.
 
@@ -319,13 +290,13 @@ For this we'll need to use `InsertRows` action of our Connector.
 
 `InsertRows` has dynamic data as an input so we'll need to create a flow to properly set this up.
 
+##### Setting up the flow
+
 Let's navigate back to the "Flows" section and create a new flow, 
 
 Pick "Start from a template" and then pick "Power Apps button" as the base step again.
 
 Let's give it a good name as before ("AddActor" sounds good).
-
-
 
 Now we'll need some inputs. For this we'll add a couple of steps named "Initialize variable".
 
@@ -355,9 +326,9 @@ We'll configure the step as seen above, binding the variables to the correspondi
 
 As a last step we'll test this flow again as we did with the previous flow. Let's add some actors while we're at it.
 
-
-
 After we're sure everything works as we want we can head back to our app and add the UI elements we need to easily add our actors.
+
+##### Adding the UI elements and using the flow
 
 This time we'll add some text boxes, some informative labels and a button.
 
@@ -379,8 +350,6 @@ The "Add actor" button's "OnSelect" action now contains the following code:
 `Set(GetActorsResult,GetActors.Run());`
 `ClearCollect(ActorsCollection,GetActorsResult.rows);`
 
-
-
 Let's play/start our application and test it out:
 
 ![image-20211123111742997](user_guide.assets/image-20211123111742997.png)
@@ -397,8 +366,6 @@ We do this because of ease-of-use, reusability, to hide complexity and also out 
 
 - We wire up the flow into the UI we create for our actions.
 
-
-
 ### More Examples
 
 What follows next are  a couple more examples of flows and actions that are possible with the connector, including some more advanced examples.
@@ -410,8 +377,6 @@ Delete an actor by ID:
  Update an actor's age by his ID:
 
 ![image-20211123115220034](user_guide.assets/image-20211123115220034.png)
-
-
 
 ### Advanced connector actions: 
 
@@ -440,23 +405,17 @@ You'll probably use the 'Query the Exasol database' action when you need joins, 
 
 ![image-20211124122500122](user_guide.assets/image-20211124122500122.png)
 
-
-
 ###### Triggering a script or stored procedure and not returning data :
 
 (Note: you can also do this using Execute statement)
 
 ![image-20211124122740144](user_guide.assets/image-20211124122740144.png)
 
-
-
 #### Execute a statement on the Exasol Database (INSERT, UPDATE, DELETE, etc)
 
 ###### A custom insert:
 
 ![image-20211123170726170](user_guide.assets/image-20211123170726170.png)
-
-
 
 ### Issues
 
