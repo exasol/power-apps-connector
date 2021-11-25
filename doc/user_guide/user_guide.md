@@ -1,6 +1,7 @@
 # Exasol Connector for Power Apps
 
 ## Preparation / Requirements
+
 You should first set up the Exasol REST API in case you haven't done so. (see: https://github.com/exasol/exasol-rest-api)
 
 ## How to install the Exasol Connector for Power Apps.
