@@ -8,7 +8,7 @@ The Power Apps Connector for Exasol enables organisations to build low-code Powe
 
 The Power Apps Connector for Exasol utilises the Exasol REST API, which should be set up as well. 
 
-See https://github.com/exasol/exasol-rest-api for instructions on how to set this up.
+See the [Exasol REST API repository](https://github.com/exasol/exasol-rest-api) for instructions on how to set this up.
 
 ## Utilizing the connector in your organisation
 
