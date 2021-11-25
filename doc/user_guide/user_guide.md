@@ -49,15 +49,28 @@ If you now browse to https://make.powerapps.com/ , pick the right organisation t
 
 ###### Configuring the connector
 
-You can further configure the connector via the edit icon:
+You can further configure the connector via the edit icon if you so wish (this is an optional step):
 
 ![image-20211122115800918](user_guide.assets/image-20211122115800918.png)
 
 Here you can: 
 
-- Enable HTTPS (it uses HTTP by default).
+- Enable HTTPS in case of the HTTP version.
+  Before you do so: There's also a HTTPS version of the connector available for download.
 
 ![image-20211122114543409](user_guide.assets/image-20211122114543409.png)
+
+Enabling HTTPS is a 2 step process in our connector's case, you'll also need to alter the host URL policy's Url template.
+
+Change "http" into "https". 
+
+
+
+![image-20211125134028331](user_guide.assets/image-20211125134028331.png)
+
+
+
+
 
 Important: Enabling "Connect via on-premises data gateway" is currently NOT supported. A separate connector and instructions will be delivered on a later date.
 
