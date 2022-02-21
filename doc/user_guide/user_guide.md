@@ -7,13 +7,13 @@ The REST API and instructions on how to set it up can be found [here](https://gi
 
 ## Installing the connector as a custom connector within your organisation
 
-Currently you need to install the connector as a custom connector within your organisation using the following steps found [here](local_installation.md):
-Certification of the connector in the power apps gallery is currently pending.
+Currently you need to install the connector as a custom connector within your organisation using the following steps found [here](local_installation.md).
 ## Current issues with the connector
 
-"Connect via on-premises data gateway" is currently NOT supported. A separate connector and instructions will be delivered on a later date if there is demand for this.
+"Connect via on-premises data gateway" is currently NOT supported.  
+A separate connector and instructions will be delivered on a later date if there is demand for this.
 
-### Making a connection using the connector
+## Making a connection using the connector
 
 Under the "Dataverse" tab, select "Connections".
 
