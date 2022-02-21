@@ -52,7 +52,7 @@ Here you can:
 
 ![image-20211122114543409](user_guide.assets/image-20211122114543409.png)
 
-Enabling HTTPS is a 2 step process in our connector's case, you'll also need to alter the host URL policy's Url template.
+Enabling HTTPS is a 2 step process in our connector's case, you'll also need to alter the host URL policy's `Url Template`.
 
 Change "http" into "https". 
 
