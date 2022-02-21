@@ -1,15 +1,13 @@
 ## How to install the Exasol Connector for Power Apps.
 
-Currently you'll need to use the paconn tool to  create or update the connector in your organisation.
-
-(installation instructions found here : https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli ) 
+Currently you'll need to use the [paconn](https://docs.microsoft.com/en-us/connectors/custom-connectors/paconn-cli) tool to create or update the connector in your organisation.
 
 The connector talks to the exasol-rest-api which you'll also need to setup if you haven't done so yet.
 
 ### Getting the connector files
 
 Clone this repository, download the repository zip or download the latest release from github and unzip the files.
-The connector consists of a settings file, an icon file and a apiDefinition.swagger.json and apiProperties.json file which describe the connector.
+The connector consists of a settings file, an icon file and an `apiDefinition.swagger.json`, `apiProperties.json` files which describe the connector.
 
 ### Using the paconn CLI tool to upload/create the connector within your organisation.
 
@@ -33,7 +31,7 @@ Pick the environment where you want to install the connector.
 Follow the steps.
 If you get prompted to alter settings.json, press "yes". 
 
-( It will update the id of the connector so you can easily update it afterwards using `paconn update -s [Path to settings.json]`).
+(It will update the id of the connector so you can easily update it afterwards using `paconn update -s [Path to settings.json]`).
 
 ###### Inspecting the connector we just created in our environment/organisation.
 
@@ -93,8 +91,8 @@ To do so, go back to the connector tab, edit the connector, select "Test" at the
 
 I personally always test the connector with the `GetTables` action. 
 
-You'll get a list of tables the database user has access to returned to you in the response if everything 's configured properly.
+You'll get a list of tables the database user has access to returned to you in the response if everything is configured properly.
 
 ### Next steps
 
-You're now ready to start [using the connector in a Power App](user_guide.md#using_the_connector_in_a_power_app): 
+You're now ready to start [using the connector in a Power App](user_guide.md#using_the_connector_in_a_power_app).
