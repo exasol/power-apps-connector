@@ -35,7 +35,7 @@ If you get prompted to alter settings.json, press "yes".
 
 ###### Inspecting the connector we just created in our environment/organisation.
 
-If you now browse to https://make.powerapps.com/ , pick the right organisation top right and click on the "Dataverse" tab to the left and then "Custom Connectors" you should be able to see the connector.
+If you now browse to https://make.powerapps.com/, pick the right organisation top right and click on the "Dataverse" tab to the left and then "Custom Connectors" you should be able to see the connector.
 
 ![image-20211122114520362](user_guide.assets/image-20211122114520362.png)
 
