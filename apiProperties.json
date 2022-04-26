@@ -28,7 +28,7 @@
         }
       }
     },
-    "iconBrandColor": "#007ee5",
+    "iconBrandColor": "#2F5AAF",
     "capabilities": [],
     "publisher": "Exasol AG",
     "stackOwner": "Exasol AG",
@@ -37,7 +37,7 @@
         "templateId": "dynamichosturl",
         "title": "host url",
         "parameters": {
-          "x-ms-apimTemplateParameter.urlTemplate": "http://@connectionParameters('api')/api/v1"
+          "x-ms-apimTemplateParameter.urlTemplate": "https://@connectionParameters('api')/api/v1"
         }
       }
     ]

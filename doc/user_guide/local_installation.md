@@ -47,14 +47,14 @@ You can further configure the connector via the edit icon if you so wish (this i
 
 Here you can: 
 
-- Enable HTTPS in case of the HTTP version.
-  Before you do so: There's also a HTTPS version of the connector available for download.
+- Use HTTP. HTTPS is the default.
+  Before you do so: There's also a HTTP version of the connector available for download.
 
 ![image-20211122114543409](user_guide.assets/image-20211122114543409.png)
 
-Enabling HTTPS is a 2 step process in our connector's case, you'll also need to alter the host URL policy's `Url Template`.
+Enabling HTTP is a 2 step process in our connector's case, you'll also need to alter the host URL policy's `Url Template`.
 
-Change "http" into "https". 
+Change "https" into "http". 
 
 ![image-20211125134028331](user_guide.assets/image-20211125134028331.png)
 
@@ -74,6 +74,7 @@ A modal will pop up, you will be asked to configure the connector.
 ![](user_guide.assets/2021-11-22-11-07-29-image-16375779996591.png)
 
 `Host`: Where your REST API is hosted (this can be an IP address or DNS name).
+E.g: `powerapp-restapi.yourcompany.com`
 
 `API Key`: This is one of the authentication keys you've configured to gain access to the REST API. 
 
