@@ -5,9 +5,6 @@
 You should first set up the Exasol REST API in case you haven't done so.   
 The REST API and instructions on how to set it up can be found [here](https://github.com/exasol/exasol-rest-api).
 
-## Installing the connector as a custom connector within your organisation
-
-Currently you need to install the connector as a custom connector within your organisation using the following steps found [here](local_installation.md).
 ## Current issues with the connector
 
 "Connect via on-premises data gateway" is currently NOT supported.  
@@ -28,13 +25,14 @@ A modal will pop up, you will be asked to configure the connector.
 
 ![](user_guide.assets/2021-11-22-11-07-29-image-16375779996591.png)
 
-`Host`: Where your REST API is hosted (this can be an IP address or DNS name).
+`Host`: Where your REST API is hosted (this can be an IP address or DNS hostname).
 
 `API Key`: This is one of the authentication keys you've configured to gain access to the REST API. 
 
 This is a secure parameter so this API Key will not be retrievable afterwards in the Power Apps UI.
 
 Note: You can still edit these 2 values afterwards.
+
 # Using the connector in a Power App
 
 ## A short overview of the available actions
