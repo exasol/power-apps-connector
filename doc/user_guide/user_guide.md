@@ -19,7 +19,7 @@ In the search bar on the top right, search for "Exasol".
 
 You'll find the connector in the search results, select it.
 
-![image-20211122114400236](user_guide.assets/image-20211122114400236.png)
+![](user_guide.assets/new-connection.png)
 
 A modal will pop up, you will be asked to configure the connector.
 
